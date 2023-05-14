@@ -9,7 +9,7 @@ import {
 import { Colors } from '../../constants/GlobalStyles';
 import OutlineButton from '../UI/OutlineButton';
 
-export default function ImagePicker() {
+export default function ImagePicker({ onTakeImage }) {
   const [pickedImage, setPickedImage] = useState('');
   const [cameraPermissionInformation, requestPermission] =
     useCameraPermissions();
@@ -21,6 +21,7 @@ export default function ImagePicker() {
       return permissionResponse.granted;
     }
 
+    // default is DENIED permission
     if (cameraPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
         'Insufficiant Permission',
@@ -46,6 +47,7 @@ export default function ImagePicker() {
       });
 
       setPickedImage(image.assets[0].uri);
+      onTakeImage(image.assets[0].uri);
     } catch (error) {
       console.log(error);
     }
@@ -76,6 +78,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary100,
     justifyContent: 'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
 
   image: {

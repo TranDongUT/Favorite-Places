@@ -40,7 +40,13 @@ export default function PlaceStack() {
           ),
         })}
       />
-      <Stack.Screen name='PlaceDetail' component={PlaceDetail} />
+      <Stack.Screen
+        name='PlaceDetail'
+        component={PlaceDetail}
+        options={{
+          title: 'Loading Place...',
+        }}
+      />
       <Stack.Screen
         name='AddPlace'
         component={AddPlace}
